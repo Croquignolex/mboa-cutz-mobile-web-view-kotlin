@@ -8,6 +8,7 @@ import android.annotation.SuppressLint
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.webView
+import kotlinx.android.synthetic.main.activity_main.swipeToRefresh
 
 class MainActivity : AppCompatActivity() {
     private var backPressedTime: Long = 0
@@ -26,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         webSettings.safeBrowsingEnabled = true
         // Load url
         webView.loadUrl("https://www.preview.mboacutz.com/")
+
+        refreshApp()
     }
 
     // Handle back button pressed
@@ -47,6 +50,15 @@ class MainActivity : AppCompatActivity() {
             }
             // Update user back pressed time
             backPressedTime = System.currentTimeMillis()
+        }
+    }
+
+    // Handle swipe down to refresh app
+    private fun refreshApp() {
+        swipeToRefresh.setOnRefreshListener {
+           // Reload web view
+            webView.reload()
+            swipeToRefresh.isRefreshing = false
         }
     }
 }
