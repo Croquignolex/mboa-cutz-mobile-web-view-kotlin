@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.webView
 
 class MainActivity : AppCompatActivity() {
-    private var backPressedTime = 0L
+    private var backPressedTime: Long = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetJavaScriptEnabled")
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             // Navigate to previous page if browser history exist
             webView.goBack()
         } else {
-            if(backPressedTime + 2000 > System.currentTimeMillis()) {
+            if((backPressedTime + 2000) > System.currentTimeMillis()) {
                 // Can exit if there is 2 seconds between the back button double tap
                 super.onBackPressed()
             } else {
@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
             // Update user back pressed time
+            backPressedTime = System.currentTimeMillis()
         }
     }
 }
