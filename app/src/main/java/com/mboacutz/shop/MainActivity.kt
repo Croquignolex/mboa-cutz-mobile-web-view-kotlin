@@ -3,8 +3,10 @@ package com.mboacutz.shop
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import android.webkit.WebSettings
 import android.webkit.WebViewClient
 import android.annotation.SuppressLint
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.webView
@@ -21,10 +23,14 @@ class MainActivity : AppCompatActivity() {
 
         // Init web view
         webView.webViewClient = WebViewClient()
+        webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
         // Set web view settings
         val webSettings = webView.settings
+        webSettings.useWideViewPort = true
         webSettings.javaScriptEnabled = true
+        webSettings.domStorageEnabled = true
         webSettings.safeBrowsingEnabled = true
+        webSettings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
         // Load url
         webView.loadUrl("https://www.preview.mboacutz.com/")
 
